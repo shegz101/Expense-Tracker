@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Expense from "./components/Expense";
+import Transaction from "./Transaction";
+import TransactionOverview from "./TransactionOverview";
 
 const Wrapper = styled.div`
   display: flex;
@@ -7,20 +8,16 @@ const Wrapper = styled.div`
   align-items: center;
   font-family: "Montserrat", sans-serif;
   margin: 30px 0 10px;
+  width: 360px;
 `;
 
-const Header = styled.h1`
-  font-size: 25px;
-  color: black;
-  font-weight: bold;
-`;
-function App() {
+const Expense = () => {
   return (
     <Wrapper>
-      <Header>Expense Tracker</Header>
-      <Expense />
+      <TransactionOverview />
+      <Transaction />
     </Wrapper>
   );
-}
+};
 
-export default App;
+export default Expense;
