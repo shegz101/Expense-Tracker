@@ -66,6 +66,23 @@ const IncomeExpenseContainer = styled.div`
   gap: 12px;
   margin: 20px;
 `;
+
+const MoneyDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid #e6e8e9;
+  padding: 15px 20px;
+  width: 122px;
+  font-size: 14px;
+  font-weight: 600;
+
+  & span {
+    font-weight: bold;
+    font-size: 20px;
+    color: ${(props) => (props.isExpense ? "red" : "green")};
+  }
+`;
 //function that triggers the view of the add transaction modal
 const AddNewTransaction = ({ setButtonState, addTransactions }) => {
   const [amount, setAmount] = useState();
@@ -128,7 +145,7 @@ const TransactionOverview = ({ addTransactions }) => {
   return (
     <Wrapper>
       <BalanceView>
-        Balance: $1000
+        Balance: $5000
         <AddTransactionButton onClick={() => setButtonState(!buttonState)}>
           {buttonState ? "Cancel" : "Add"}
         </AddTransactionButton>
@@ -140,7 +157,14 @@ const TransactionOverview = ({ addTransactions }) => {
           addTransactions={addTransactions}
         />
       )}
-      <IncomeExpenseContainer></IncomeExpenseContainer>
+      <IncomeExpenseContainer>
+        <MoneyDiv isExpense={false}>
+          Income <span>$10000</span>
+        </MoneyDiv>
+        <MoneyDiv isExpense={true}>
+          Expense <span>$5000</span>
+        </MoneyDiv>
+      </IncomeExpenseContainer>
     </Wrapper>
   );
 };
