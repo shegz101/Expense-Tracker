@@ -39,7 +39,7 @@ const NewTransactionContainer = styled.div`
   border: 1px solid #e6e8e9;
   gap: 12px;
   padding: 15px 20px;
-  margin: 10px 20px;
+  margin: 20px;
   width: 100%;
   & input {
     outline: none;
@@ -59,25 +59,71 @@ const RadioSelection = styled.div`
     margin: 0 10px;
   }
 `;
+
+const IncomeExpenseContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin: 20px;
+`;
 //function that triggers the view of the add transaction modal
-const addNewTransaction = () => {
+const AddNewTransaction = ({ setButtonState, addTransactions }) => {
+  const [amount, setAmount] = useState();
+  const [description, setDescription] = useState();
+  const [category, setCategory] = useState("Expense");
+
+  //Function to initiate addition of new transaction
+  const addTransaction = () => {
+    addTransactions({
+      amount: Number(amount),
+      description,
+      category,
+      id: Date.now(),
+    });
+    setButtonState();
+  };
   return (
     <NewTransactionContainer>
-      <input placeholder="Amount" />
-      <input placeholder="Description" />
+      <input
+        placeholder="Amount"
+        value={amount}
+        type="number"
+        onChange={(e) => setAmount(e.target.value)}
+      />
+      <input
+        placeholder="Description"
+        value={description}
+        type="text"
+        onChange={(e) => setDescription(e.target.value)}
+      />
       <RadioSelection>
-        <input type="radio" value="Expense" id="expense" name="expense" />
-        <label htmlFor="Expense">Expense</label>
-        <input type="radio" value="Income" id="income" name="income" />
+        <input
+          type="radio"
+          value="Income"
+          id="income"
+          name="income"
+          checked={category === "Income"}
+          onChange={(e) => setCategory(e.target.value)}
+        />
         <label htmlFor="Expense">Income</label>
+        <input
+          type="radio"
+          value="Expense"
+          id="expense"
+          name="expense"
+          checked={category === "Expense"}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+        <label htmlFor="Expense">Expense</label>
       </RadioSelection>
-      <AddTransactionButton>Add Transaction</AddTransactionButton>
+      <AddTransactionButton onClick={addTransaction}>
+        Add Transaction
+      </AddTransactionButton>
     </NewTransactionContainer>
   );
 };
 
-const TransactionOverview = () => {
-  //state to track if we ahould display add or cancel for transaction button
+const TransactionOverview = ({ addTransactions }) => {
   const [buttonState, setButtonState] = useState(false);
   return (
     <Wrapper>
@@ -88,7 +134,13 @@ const TransactionOverview = () => {
         </AddTransactionButton>
       </BalanceView>
       {/* Render the new transaction modal only when the add button is clicked - when the buttonState is true */}
-      {buttonState && addNewTransaction()}
+      {buttonState && (
+        <AddNewTransaction
+          setButtonState={setButtonState}
+          addTransactions={addTransactions}
+        />
+      )}
+      <IncomeExpenseContainer></IncomeExpenseContainer>
     </Wrapper>
   );
 };
