@@ -5,11 +5,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  margin: 30px 0 10px;
 `;
 
 const Transaction = () => {
-  return <Wrapper>Transaction</Wrapper>;
+  return (
+    <Wrapper>
+      Transaction
+      <input placeholder="search" />
+    </Wrapper>
+  );
 };
 
 export default Transaction;
