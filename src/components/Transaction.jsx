@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   font-family: "Montserrat", sans-serif;
   padding: 10px 22px;
   font-size: 18px;
@@ -13,17 +13,42 @@ const Wrapper = styled.div`
   & input {
     padding: 10px 12px;
     outline: none;
+    width: 100%;
     border-radius: 10px;
     background: #e6e8e9;
     border: 1px solid #e6e8e9;
   }
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 2px;
+  align-items: center;
+  font-weight: normal;
+  justify-content: space-between;
+  border-right: 4px solid ${({ isExpense }) => (isExpense ? "red" : "green")};
+`;
+
+const TransactsRows = ({ payload }) => {
+  return (
+    <Row isExpense={payload?.category === "Expense"}>
+      <span>{payload.description}</span>
+      <span>${payload.amount}</span>
+    </Row>
+  );
+};
+
 const Transaction = ({ transacts }) => {
   return (
     <Wrapper>
       Transaction
       <input placeholder="search" />
+      {transacts?.length > 0
+        ? transacts.map((payload) => <TransactsRows payload={payload} />)
+        : ""}
     </Wrapper>
   );
 };
