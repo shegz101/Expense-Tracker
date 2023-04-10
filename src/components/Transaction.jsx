@@ -5,6 +5,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: "Montserrat", sans-serif;
+  padding: 10px 22px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  gap: 10px;
 `;
 
 const Transaction = () => {
