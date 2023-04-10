@@ -24,7 +24,7 @@ const Expense = () => {
   return (
     <Wrapper>
       <TransactionOverview addTransactions={addTransactions} />
-      <Transaction trnsacts={transacts} />
+      <Transaction transacts={transacts} />
     </Wrapper>
   );
 };
