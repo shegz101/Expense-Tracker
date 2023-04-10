@@ -10,9 +10,16 @@ const Wrapper = styled.div`
   font-weight: bold;
   width: 100%;
   gap: 10px;
+  & input {
+    padding: 10px 12px;
+    outline: none;
+    border-radius: 10px;
+    background: #e6e8e9;
+    border: 1px solid #e6e8e9;
+  }
 `;
 
-const Transaction = () => {
+const Transaction = ({ transacts }) => {
   return (
     <Wrapper>
       Transaction
