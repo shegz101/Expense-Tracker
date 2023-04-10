@@ -93,8 +93,8 @@ const AddNewTransaction = ({ setButtonState, addTransactions }) => {
   const addTransaction = () => {
     addTransactions({
       amount: Number(amount),
-      description,
-      category,
+      description: description,
+      category: category,
       id: Date.now(),
     });
     setButtonState();
