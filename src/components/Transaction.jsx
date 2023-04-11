@@ -25,9 +25,11 @@ const Row = styled.div`
   flex-direction: row;
   padding: 10px 15px;
   font-size: 14px;
+  border: 1px solid #e6e8e9;
   border-radius: 2px;
   align-items: center;
   font-weight: normal;
+  width: 100%;
   justify-content: space-between;
   border-right: 4px solid ${({ isExpense }) => (isExpense ? "red" : "green")};
 `;
