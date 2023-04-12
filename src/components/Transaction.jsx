@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +30,7 @@ const Row = styled.div`
   border: 1px solid #e6e8e9;
   border-radius: 2px;
   align-items: center;
-  font-weight: normal;
+  font-weight: bold;
   width: 100%;
   justify-content: space-between;
   border-right: 4px solid ${({ isExpense }) => (isExpense ? "red" : "green")};
@@ -39,17 +41,27 @@ const TransactsRows = ({ payload }) => {
     <Row isExpense={payload?.category === "Expense"}>
       <span>{payload.description}</span>
       <span>${payload.amount}</span>
+      <AiOutlineDelete />
+      <AiOutlineEdit />
     </Row>
   );
 };
 
 const Transaction = ({ transacts }) => {
+  const [filteredTransacts, setFilteredTransacts] = useState(transacts);
+  const [searchInput, setSearchInput] = useState("");
   return (
     <Wrapper>
       Transaction
-      <input placeholder="search" />
-      {transacts?.length > 0
-        ? transacts.map((payload) => <TransactsRows payload={payload} />)
+      <input
+        placeholder="search"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
+      {filteredTransacts?.length > 0
+        ? filteredTransacts.map((payload) => (
+            <TransactsRows payload={payload} />
+          ))
         : ""}
     </Wrapper>
   );

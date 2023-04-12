@@ -140,12 +140,12 @@ const AddNewTransaction = ({ setButtonState, addTransactions }) => {
   );
 };
 
-const TransactionOverview = ({ addTransactions }) => {
+const TransactionOverview = ({ addTransactions, incomes, expenses }) => {
   const [buttonState, setButtonState] = useState(false);
   return (
     <Wrapper>
       <BalanceView>
-        Balance: $5000
+        Balance: ${incomes - expenses}
         <AddTransactionButton onClick={() => setButtonState(!buttonState)}>
           {buttonState ? "Cancel" : "Add"}
         </AddTransactionButton>
@@ -159,10 +159,10 @@ const TransactionOverview = ({ addTransactions }) => {
       )}
       <IncomeExpenseContainer>
         <MoneyDiv isExpense={false}>
-          Income <span>$10000</span>
+          Income <span>${incomes}</span>
         </MoneyDiv>
         <MoneyDiv isExpense={true}>
-          Expense <span>$5000</span>
+          Expense <span>${expenses}</span>
         </MoneyDiv>
       </IncomeExpenseContainer>
     </Wrapper>
