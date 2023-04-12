@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,13 +50,31 @@ const TransactsRows = ({ payload }) => {
 const Transaction = ({ transacts }) => {
   const [filteredTransacts, setFilteredTransacts] = useState(transacts);
   const [searchInput, setSearchInput] = useState("");
+
+  const filterTransactions = (searchInput) => {
+    if (!searchInput || !searchInput.trim().length) {
+      setFilteredTransacts(transacts);
+      return;
+    }
+    let transact = [...transacts];
+    transact = transact.filter((payload) =>
+      payload.description
+        .toLowerCase()
+        .includes(searchInput.toLowerCase().trim())
+    );
+    setFilteredTransacts(transact);
+  };
+
+  useEffect(() => filterTransactions(searchInput), [transacts]);
   return (
     <Wrapper>
       Transaction
       <input
         placeholder="search"
         value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
+        onChange={(e) => {
+          setSearchInput(e.target.value), filterTransactions(e.target.value);
+        }}
       />
       {filteredTransacts?.length > 0
         ? filteredTransacts.map((payload) => (
