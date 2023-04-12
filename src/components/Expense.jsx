@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 const Expense = () => {
   const [transacts, PopulateTransacts] = useState([]);
-  const [expsenses, setExpenses] = useState(0);
+  const [expenses, setExpenses] = useState(0);
   const [incomes, setIncomes] = useState(0);
 
   //function to calculate the balance
@@ -46,7 +46,7 @@ const Expense = () => {
     <Wrapper>
       <TransactionOverview
         addTransactions={addTransactions}
-        expsenses={expsenses}
+        expenses={expenses}
         incomes={incomes}
       />
       <Transaction transacts={transacts} />
