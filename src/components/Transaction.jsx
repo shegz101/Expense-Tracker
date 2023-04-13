@@ -36,13 +36,22 @@ const Row = styled.div`
   border-right: 4px solid ${({ isExpense }) => (isExpense ? "red" : "green")};
 `;
 
+const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+`;
+
 const TransactsRows = ({ payload }) => {
   return (
     <Row isExpense={payload?.category === "Expense"}>
       <span>{payload.description}</span>
       <span>${payload.amount}</span>
-      <AiOutlineDelete />
-      <AiOutlineEdit />
+      <Icons>
+        <AiOutlineDelete />
+        <AiOutlineEdit />
+      </Icons>
     </Row>
   );
 };
